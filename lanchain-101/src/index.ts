@@ -1,8 +1,8 @@
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { config } from './config';
-import { urlToBase64Url } from './common/base64-url';
 import { PromptTemplate, ChatPromptTemplate } from '@langchain/core/prompts';
 import readline from 'readline';
+import { StructuredOutputParser } from '@langchain/core/output_parsers';
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -15,15 +15,28 @@ async function main() {
     model: 'gemini-2.5-flash',
   });
 
-  const taskClassifierPromptTemplate = ChatPromptTemplate.fromMessages([
+  const parser = StructuredOutputParser.fromNamesAndDescriptions({
+    'prompt': 'the human prompt',
+    'task_type': 'the task type, one of "image_generation", "text_generation"',
+  });
+
+  
+  const promptTemplate = ChatPromptTemplate.fromMessages([
     [
       'system',
-      'Classify the human message into a task type: (text-generation or image-processing)',
+      `Classify the human message into a task type.
+      Format Instructions: {formatInstructions}`,
     ],
     ['human', '{input}'],
   ]);
+  
+  const formatInstructions = parser.getFormatInstructions();
 
-  const taskClassifier = taskClassifierPromptTemplate.pipe(model);
+  const partialPrompt = await promptTemplate.partial({
+    formatInstructions,
+  })
+
+  const taskClassifier = partialPrompt.pipe(model).pipe(parser);
 
   while (true) {
     const input = await getInput();
@@ -33,7 +46,7 @@ async function main() {
       input,
     });
 
-    console.log(response.text);
+    console.log(response);
   }
 }
 
