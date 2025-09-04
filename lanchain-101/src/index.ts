@@ -15,27 +15,26 @@ async function main() {
     model: 'gemini-2.5-flash',
   });
 
-  const prompt = ChatPromptTemplate.fromMessages([
+  const taskClassifierPromptTemplate = ChatPromptTemplate.fromMessages([
     [
       'system',
-      "If the human message a yes/no question, answer with yes or no. Otherwise, answer with some sorry message.",
+      'Classify the human message into a task type: (text-generation or image-processing)',
     ],
     ['human', '{input}'],
   ]);
 
-  const yesOrNoModel = prompt.pipe(model);
+  const taskClassifier = taskClassifierPromptTemplate.pipe(model);
 
   while (true) {
     const input = await getInput();
     if (!input) break;
 
-    const response = await yesOrNoModel.invoke({
+    const response = await taskClassifier.invoke({
       input,
     });
-  
+
     console.log(response.text);
   }
-
 }
 
 async function getInput() {
