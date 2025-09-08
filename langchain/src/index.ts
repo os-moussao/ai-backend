@@ -1,5 +1,9 @@
 import readline from 'readline';
-import { getTaskType } from './programs/taskClassifier/taskClassifier';
+import {
+  getTaskType,
+  humanReadableTaskType,
+} from './programs/taskClassifier/taskClassifier';
+import { models } from './common/models';
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -12,7 +16,10 @@ async function main() {
     const input = await getInput();
     if (!input) break;
 
-    const response = await getTaskType(input);
+    // const model = models['gemini-2.5-flash'];
+
+    const response = await humanReadableTaskType(input);
+
     console.log(response);
   }
 }
