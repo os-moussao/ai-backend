@@ -3,7 +3,7 @@ import {
   TaskClassifierResponse,
   TaskClassifierResponseSchema,
 } from './taskClassifier.types';
-import { models } from '../../common/models';
+import { modelsRegistry } from '../../common/models.registry';
 import { Runnable } from '@langchain/core/runnables';
 
 export let taskClassifier: Runnable<any, TaskClassifierResponse> | null = null;
@@ -23,9 +23,9 @@ export async function getTaskClassifier() {
 }
 
 async function createTaskClassifier() {
-  const model = models['gemini-2.5-flash'].withStructuredOutput(
-    TaskClassifierResponseSchema
-  );
+  const model = modelsRegistry.gemini
+    .new('gemini-2.5-flash', { temperature: 0.5 })
+    .withStructuredOutput(TaskClassifierResponseSchema);
 
   const promptTemplate = ChatPromptTemplate.fromMessages([
     ['system', 'Classify the human message into a task type.'],
@@ -38,7 +38,9 @@ async function createTaskClassifier() {
 export async function humanReadableTaskType(input: string) {
   const taskClassifier = await getTaskClassifier();
 
-  const model = models['gemini-2.5-flash'];
+  const model = modelsRegistry.gemini.new('gemini-2.5-flash', {
+    temperature: 0.5,
+  });
 
   const promptTemplate = ChatPromptTemplate.fromMessages([
     ['ai', 'prompt = {prompt} | taskType = {taskType}'],
