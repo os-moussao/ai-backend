@@ -7,7 +7,7 @@ export const CONVERSATIONAL_AGENT = 'conversational_agent';
 export async function conversationalAgent(
   state: GraphState
 ): Promise<Partial<GraphState>> {
-  logState(state);
+  // logState(state);
 
   const model = modelsRegistry.gemini.get('gemini-2.5-flash', {
     temperature: 1,

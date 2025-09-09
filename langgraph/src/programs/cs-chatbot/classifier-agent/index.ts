@@ -10,7 +10,7 @@ export const CLASSIFIER_AGENT = 'classifier_agent';
 export async function classifierAgent(
   state: GraphState
 ): Promise<Partial<GraphState>> {
-  logState(state);
+  // logState(state);
 
   const model = modelsRegistry.gemini
     .get('gemini-2.5-flash', {
