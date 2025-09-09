@@ -15,7 +15,7 @@ const GEMINI_MODELS = [
 export const modelsRegistry = {
   gemini: {
     availableModels: GEMINI_MODELS,
-    new(
+    get(
       model: (typeof GEMINI_MODELS)[number],
       options: Omit<GoogleGenerativeAIChatInput, 'apiKey' | 'model'> = {}
     ) {

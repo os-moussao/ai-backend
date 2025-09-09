@@ -2,14 +2,16 @@
   "scripts": {
     "build": "rm -rf ./dist && npx tsc",
     "start:dev": "ts-node src/index.ts",
-    "start": "node dist/src/index.js"
+    "start": "node dist/src/index.js",
+    "cs": "node dist/src/programs/cs-chatbot/index.js",
+    "cs:dev": "ts-node src/programs/cs-chatbot/index.ts"
   },
   "dependencies": {
     "@langchain/core": "^0.3.68",
     "@langchain/google-genai": "^0.2.16",
     "@langchain/langgraph": "^0.4.9",
     "dotenv": "^17.2.1",
-    "zod": "^4.1.5"
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",

@@ -1,14 +1,7 @@
-import { getInput } from './common/io.utils';
-
 main();
 
 async function main() {
-  while (true) {
-    const input = await getInput();
-    if (!input) break;
-
-    // const response = await getResponse()
-    // console.log(response)
-  }
+  console.log(
+    `This project contains multiple programs.\nPlease run a specific program using "npm run <program-name>[:dev]" command.`
+  );
 }
-
