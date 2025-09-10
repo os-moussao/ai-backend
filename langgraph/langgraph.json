@@ -1,0 +1,11 @@
+{
+  "graphs": {
+    "graph": "./src/programs/cs-chatbot/cs.graph.ts:graphForStudio"
+  },
+  "node_version": "20",
+  "env": ".env",
+  "dockerfile_lines": [],
+  "metadata": {
+    "studioLink": "https://smith.langchain.com/studio?baseUrl=http://localhost:8123"
+  }
+}

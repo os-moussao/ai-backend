@@ -6,7 +6,9 @@
     "start:dev": "npm run ts-node src/index.ts",
     "start": "npm run node dist/src/index.js",
     "cs": "npm run node dist/src/programs/cs-chatbot/index.js",
-    "cs:dev": "npm run ts-node src/programs/cs-chatbot/index.ts"
+    "cs:dev": "npm run ts-node src/programs/cs-chatbot/index.ts",
+    "studio": "npx @langchain/langgraph-cli up --port 8123 > /dev/null 2>&1 & echo Open https://smith.langchain.com/studio?baseUrl=http://localhost:8123 after the container starts",
+    "studio:dev": "npx @langchain/langgraph-cli dev --port 8123"
   },
   "dependencies": {
     "@langchain/core": "^0.3.68",
@@ -16,6 +18,7 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
+    "@langchain/langgraph-cli": "^0.0.12",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2"

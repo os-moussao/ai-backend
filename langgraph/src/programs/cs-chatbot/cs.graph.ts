@@ -42,3 +42,5 @@ const builder = new StateGraph(GraphStateAnnotation)
   .addEdge(BILLING_AGENT, END_NODE);
 
 export const graph = builder.compile({ checkpointer: new MemorySaver() });
+
+export const graphForStudio = builder.compile(); // https://github.com/langchain-ai/langgraph/discussions/4375
