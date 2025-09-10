@@ -20,7 +20,6 @@ export const GraphStateAnnotation = Annotation.Root({
   refundAuthorized: Annotation<boolean>,
   messageType: Annotation<(typeof MessageTypes)[number]>,
   complaintType: Annotation<(typeof ComplaintTypes)[number]>,
-  finalResponse: Annotation<string>({ reducer: (_, b) => b }),
 });
 
 export type GraphState = typeof GraphStateAnnotation.State;

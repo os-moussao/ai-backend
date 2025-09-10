@@ -32,7 +32,7 @@ export async function classifierAgent(
 
   const chain = promptTemplate.pipe(model);
 
-  const latestMessage = state.messages[state.messages.length - 1].text;
+  const latestMessage = state.messages.at(-1)?.text;
   // const formatInstructions = StructuredOutputParser.fromZodSchema(
   //   ClassifierResponseSchema
   // ).getFormatInstructions();

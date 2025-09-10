@@ -27,5 +27,5 @@ export async function conversationalAgent(
     ...state.messages,
   ]);
 
-  return { messages: [response], finalResponse: response.text };
+  return { messages: [response] };
 }

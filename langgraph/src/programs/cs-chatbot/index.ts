@@ -23,6 +23,6 @@ async function main() {
       }
     );
 
-    console.log(response.finalResponse);
+    console.log(response.messages.at(-1)?.text);
   }
 }
