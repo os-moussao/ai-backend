@@ -1,8 +1,16 @@
 import { modelsRegistry } from '../../../common/models.registry';
 import { GraphState } from '../cs.graph';
 import { logState } from '../../../common/logState';
+import { UserMessageType } from '../classifier-agent/schema';
 
 export const CONVERSATIONAL_AGENT = 'conversational_agent';
+
+const ACTION_TEMPLATES: Record<UserMessageType, string> = {
+  complaint: `apologize to the user's complaint and let them know it will be taken in consideration.`,
+  question: `tell user to send their question to "contact@company.com"`,
+  feedback: `thank the user for their feedback.`,
+  other: `ask the user to give you more details for you to help them better.`,
+};
 
 export async function conversationalAgent(
   state: GraphState
@@ -13,14 +21,12 @@ export async function conversationalAgent(
     temperature: 1,
   });
 
-  const TEMPLATE = ` You are a customer service assistant bot.
-      Our Classification agent has determined that the user message is of type **${state.messageType}**.
-      You do not have much information about the company, but you can respond to the user message professionally.
-      Based on the message type, respond appropriately:   
-      If the user message is a complaint, apologize and let them know it will be taken in consideration.
-      If the user message is a question, tell user to send their question to "contact@company.com".
-      If the user message is feedback, thank the user for their feedback.
-      If the user message is of type "other", ask the user to give you more details for you to help them better.`;
+  const TEMPLATE = `You are a customer service assistant bot.
+  You do not have much information about the company, but you can respond to the user message professionally.
+  Our Classification agent has determined that the user message is of type **${
+    state.messageType
+  }**. 
+  Do the following: ${ACTION_TEMPLATES[state.messageType]}`;
 
   const response = await model.invoke([
     { role: 'system', content: TEMPLATE },

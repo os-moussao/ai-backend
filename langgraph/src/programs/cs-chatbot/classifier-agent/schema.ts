@@ -7,7 +7,11 @@ export const MessageTypes = [
   'other',
 ] as const;
 
+export type UserMessageType = (typeof MessageTypes)[number];
+
 export const ComplaintTypes = ['billing', 'technical', 'other'] as const;
+
+export type ComplaintType = (typeof ComplaintTypes)[number];
 
 export const ClassifierResponseSchema = z.object({
   messageType: z.enum(MessageTypes).describe('Type of the user message'),
