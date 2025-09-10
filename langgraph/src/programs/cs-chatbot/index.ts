@@ -1,11 +1,11 @@
-import { printGraph } from '../../common/printGraph';
 import { getInput } from '../../common/io.utils';
 import { graph } from './cs.graph';
+import crypto from 'crypto';
 
 main();
 
 async function main() {
-  // printGraph(graph);
+  const conversationId = crypto.randomUUID();
 
   while (true) {
     const input = await getInput();
@@ -17,7 +17,7 @@ async function main() {
       },
       {
         configurable: {
-          thread_id: 'testing',
+          thread_id: conversationId,
         },
       }
     );
