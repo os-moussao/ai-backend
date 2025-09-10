@@ -11,6 +11,15 @@ async function main() {
     const input = await getInput();
     if (!input) break;
 
+    // const response = await graph.stream(
+    //   { messages: [input] },
+    //   { configurable: { thread_id: conversationId } }
+    // );
+
+    // for await (const chunk of response) {
+    //   console.log(chunk);
+    // }
+
     const response = await graph.invoke(
       {
         messages: [input],
