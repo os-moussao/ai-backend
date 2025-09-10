@@ -1,12 +1,15 @@
 {
   "scripts": {
     "build": "rm -rf ./dist && npx tsc",
-    "start:dev": "ts-node src/index.ts",
-    "start": "node dist/src/index.js"
+    "ts-node": "ts-node -r tsconfig-paths/register",
+    "node": "node -r tsconfig-paths/register",
+    "start:dev": "npm run ts-node src/index.ts",
+    "start": "npm run node dist/src/index.js"
   },
   "devDependencies": {
     "@types/axios": "^0.9.36",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2"
   },
   "dependencies": {

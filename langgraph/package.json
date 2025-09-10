@@ -1,10 +1,12 @@
 {
   "scripts": {
     "build": "rm -rf ./dist && npx tsc",
-    "start:dev": "ts-node src/index.ts",
-    "start": "node dist/src/index.js",
-    "cs": "node dist/src/programs/cs-chatbot/index.js",
-    "cs:dev": "ts-node src/programs/cs-chatbot/index.ts"
+    "ts-node": "ts-node -r tsconfig-paths/register",
+    "node": "node -r tsconfig-paths/register",
+    "start:dev": "npm run ts-node src/index.ts",
+    "start": "npm run node dist/src/index.js",
+    "cs": "npm run node dist/src/programs/cs-chatbot/index.js",
+    "cs:dev": "npm run ts-node src/programs/cs-chatbot/index.ts"
   },
   "dependencies": {
     "@langchain/core": "^0.3.68",
@@ -15,6 +17,7 @@
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.2"
   }
 }
