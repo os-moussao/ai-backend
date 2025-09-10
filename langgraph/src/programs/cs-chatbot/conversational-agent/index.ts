@@ -1,6 +1,5 @@
 import { modelsRegistry } from '../../../common/models.registry';
 import { GraphState } from '../cs.graph';
-import { logState } from '../../../common/logState';
 import { UserMessageType } from '../classifier-agent/schema';
 
 export const CONVERSATIONAL_AGENT = 'conversational_agent';
@@ -15,8 +14,6 @@ const ACTION_TEMPLATES: Record<UserMessageType, string> = {
 export async function conversationalAgent(
   state: GraphState
 ): Promise<Partial<GraphState>> {
-  // logState(state);
-
   const model = modelsRegistry.gemini.get('gemini-2.5-flash', {
     temperature: 1,
   });

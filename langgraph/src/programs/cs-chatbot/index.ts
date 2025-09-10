@@ -1,7 +1,6 @@
 import { printGraph } from '../../common/printGraph';
 import { getInput } from '../../common/io.utils';
 import { graph } from './cs.graph';
-import { logState } from '../../common/logState';
 
 main();
 

@@ -3,15 +3,12 @@ import { modelsRegistry } from '../../../common/models.registry';
 import { GraphState } from '../cs.graph';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ClassifierResponse, ClassifierResponseSchema } from './schema';
-import { logState } from '../../../common/logState';
 
 export const CLASSIFIER_AGENT = 'classifier_agent';
 
 export async function classifierAgent(
   state: GraphState
 ): Promise<Partial<GraphState>> {
-  // logState(state);
-
   const model = modelsRegistry.gemini
     .get('gemini-2.5-flash', {
       temperature: 0.1,
