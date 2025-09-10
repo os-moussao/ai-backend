@@ -48,14 +48,18 @@ export async function classifierAgent(
 I abandoned including the format instructions because of many zod issues
 like incompatibility of zod versions, and the error: Type instantiation is excessively deep and possibly infinite.ts(2589)
 
-todo 1:
+[X] todo 1:
  ensure that without giving format instructions, the model still responds in the correct format
  try to see how .withStructuredOutput works under the hood (if it prompts the model to respond in a structured way)
+--> .withStructuredOutput uses function calling for output parsing, and instructs LLM with JSON Schema inferred from zod (zod-to-json-schema)
 
-todo 2:
+[X] todo 2:
  in case .withStructuredOutput does not work properly
  try to use json schema with (zod-to-json-schema)
+--> .withStructuredOutput already does that
 
-todo 3:
+[X] todo 3:
   maybe the zod infinite compilation is with typescript config
+--> No, it's probably zod version incompatibility
+--> I searched many issues about this, and it seems to be a common problem and there's no clear solution
 */
